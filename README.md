@@ -47,18 +47,6 @@ For faster builds during development:
 swift run
 ```
 
-## Installation & Troubleshooting
-
-### "App cannot be opened" or "Malware" Warning
-Since this application is signed but not **notarized** by Apple, you may see a warning preventing you from opening it.
-
-**To open the app:**
-1.  **Right-click** (or Control-click) on `Matrix Rain.app`.
-2.  Select **Open** from the context menu.
-3.  Click **Open** in the dialog box that appears.
-
-You only need to do this once.
-
 ## Controls
 
 *   **Quit**: Press `Cmd + Q` or kill the process from the terminal (`Ctrl + C`).
