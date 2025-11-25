@@ -25,8 +25,8 @@ You can build and run this application entirely from the terminal using the Swif
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/dparksports/github-matrix-gemini.git
-    cd github-matrix-gemini
+    git clone https://github.com/dparksports/matrix-rain.git
+    cd matrix-rain
     ```
 
 2.  **Build the application (Release mode):**
