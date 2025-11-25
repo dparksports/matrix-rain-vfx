@@ -13,7 +13,8 @@ let package = Package(
         .executableTarget(
             name: "MatrixApp",
             resources: [
-                .process("Resources")
+                .process("Resources"),
+                .process("Shaders.metal")
             ]
         )
     ]

@@ -35,9 +35,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.setFrameAutosaveName("MatrixWindow")
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
-        window.backgroundColor = .clear
-        window.isOpaque = false
-        window.hasShadow = false
+        window.backgroundColor = .black
+        window.isOpaque = true
+        window.hasShadow = true
         window.level = .floating
         window.ignoresMouseEvents = false // Set to true if you want click-through
         

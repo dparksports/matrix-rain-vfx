@@ -1,9 +1,9 @@
 ---
-path:            '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/26.1/_SpriteKit_SwiftUI.swiftmodule/arm64e-apple-macos.swiftmodule'
+path:            '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/26.1/MetalKit.swiftmodule/arm64e-apple-macos.swiftmodule'
 dependencies:
-  - mtime:           1761045380000000000
-    path:            '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/26.1/_SpriteKit_SwiftUI.swiftmodule/arm64e-apple-macos.swiftmodule'
-    size:            46148
+  - mtime:           1761045260000000000
+    path:            '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/26.1/MetalKit.swiftmodule/arm64e-apple-macos.swiftmodule'
+    size:            25176
   - mtime:           1760163615000000000
     path:            'usr/lib/swift/Swift.swiftmodule/arm64e-apple-macos.swiftinterface'
     size:            2258303
@@ -20,10 +20,6 @@ dependencies:
     path:            'usr/include/Dispatch.apinotes'
     size:            19
     sdk_relative:    true
-  - mtime:           1760498930000000000
-    path:            'System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes'
-    size:            53963
-    sdk_relative:    true
   - mtime:           1760328920000000000
     path:            'usr/include/XPC.apinotes'
     size:            123
@@ -35,6 +31,10 @@ dependencies:
   - mtime:           1760588982000000000
     path:            'System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes'
     size:            81098
+    sdk_relative:    true
+  - mtime:           1760498930000000000
+    path:            'System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes'
+    size:            53963
     sdk_relative:    true
   - mtime:           1760169880000000000
     path:            'System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes'
@@ -68,13 +68,9 @@ dependencies:
     path:            'System/Library/Frameworks/ModelIO.framework/Headers/ModelIO.apinotes'
     size:            1659
     sdk_relative:    true
-  - mtime:           1760170690000000000
-    path:            'System/Library/Frameworks/GLKit.framework/Headers/GLKit.apinotes'
-    size:            97
-    sdk_relative:    true
-  - mtime:           1760170984000000000
-    path:            'System/Library/Frameworks/SpriteKit.framework/Headers/SpriteKit.apinotes'
-    size:            697
+  - mtime:           1760165080000000000
+    path:            'System/Library/Frameworks/MetalKit.framework/Headers/MetalKit.apinotes'
+    size:            7380
     sdk_relative:    true
   - mtime:           1760165396000000000
     path:            'usr/lib/swift/_DarwinFoundation1.swiftmodule/arm64e-apple-macos.swiftinterface'
@@ -103,6 +99,10 @@ dependencies:
   - mtime:           1760166026000000000
     path:            'usr/lib/swift/_StringProcessing.swiftmodule/arm64e-apple-macos.swiftinterface'
     size:            24506
+    sdk_relative:    true
+  - mtime:           1760166508000000000
+    path:            'usr/lib/swift/simd.swiftmodule/arm64e-apple-macos.swiftinterface'
+    size:            229542
     sdk_relative:    true
   - mtime:           1760166553000000000
     path:            'System/Library/Frameworks/Combine.framework/Modules/Combine.swiftmodule/arm64e-apple-macos.swiftinterface'
@@ -144,13 +144,13 @@ dependencies:
     path:            'usr/lib/swift/Metal.swiftmodule/arm64e-apple-macos.swiftinterface'
     size:            43403
     sdk_relative:    true
-  - mtime:           1760166508000000000
-    path:            'usr/lib/swift/simd.swiftmodule/arm64e-apple-macos.swiftinterface'
-    size:            229542
-    sdk_relative:    true
   - mtime:           1760170062000000000
     path:            'System/Library/Frameworks/CoreGraphics.framework/Modules/CoreGraphics.swiftmodule/arm64e-apple-macos.swiftinterface'
     size:            91635
+    sdk_relative:    true
+  - mtime:           1760168229000000000
+    path:            'usr/lib/swift/ModelIO.swiftmodule/arm64e-apple-macos.swiftinterface'
+    size:            6613
     sdk_relative:    true
   - mtime:           1760168929000000000
     path:            'System/Library/Frameworks/Accessibility.framework/Modules/Accessibility.swiftmodule/arm64e-apple-macos.swiftinterface'
@@ -220,29 +220,9 @@ dependencies:
     path:            'System/Library/Frameworks/AppKit.framework/Modules/AppKit.swiftmodule/arm64e-apple-macos.swiftinterface'
     size:            120426
     sdk_relative:    true
-  - mtime:           1760168229000000000
-    path:            'usr/lib/swift/ModelIO.swiftmodule/arm64e-apple-macos.swiftinterface'
-    size:            6613
-    sdk_relative:    true
-  - mtime:           1760171009000000000
-    path:            'usr/lib/swift/GLKit.swiftmodule/arm64e-apple-macos.swiftinterface'
-    size:            3328
-    sdk_relative:    true
-  - mtime:           1760171214000000000
-    path:            'usr/lib/swift/SpriteKit.swiftmodule/arm64e-apple-macos.swiftinterface'
-    size:            2501
-    sdk_relative:    true
-  - mtime:           1760166730000000000
-    path:            'usr/lib/swift/Spatial.swiftmodule/arm64e-apple-macos.swiftinterface'
-    size:            225283
-    sdk_relative:    true
-  - mtime:           1760172216000000000
-    path:            'System/Library/Frameworks/SwiftUI.framework/Modules/SwiftUI.swiftmodule/arm64e-apple-macos.swiftinterface'
-    size:            1546170
-    sdk_relative:    true
-  - mtime:           1760171611000000000
-    path:            'System/Library/Frameworks/_SpriteKit_SwiftUI.framework/Modules/_SpriteKit_SwiftUI.swiftmodule/arm64e-apple-macos.swiftinterface'
-    size:            4382
+  - mtime:           1760171022000000000
+    path:            'usr/lib/swift/MetalKit.swiftmodule/arm64e-apple-macos.swiftinterface'
+    size:            1424
     sdk_relative:    true
 version:         1
 ...

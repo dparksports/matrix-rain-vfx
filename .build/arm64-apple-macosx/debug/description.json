@@ -16,6 +16,34 @@
           "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp_MatrixApp.bundle/Matrix-Code.ttf"
         }
       ]
+    },
+    "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp_MatrixApp.bundle/Shaders.metal" : {
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/Sources/MatrixApp/Shaders.metal"
+        }
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp_MatrixApp.bundle/Shaders.metal"
+        }
+      ]
+    },
+    "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp_MatrixApp.bundle/matrix_glyphs.png" : {
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/Sources/MatrixApp/Resources/matrix_glyphs.png"
+        }
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp_MatrixApp.bundle/matrix_glyphs.png"
+        }
+      ]
     }
   },
   "explicitTargetDependencyImportCheckingMode" : {
@@ -41,11 +69,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixRenderer.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixScene.swift"
         },
         {
           "kind" : "file",
           "name" : "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MetalView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/Sources/MatrixApp/TextureAtlas.swift"
         },
         {
           "kind" : "file",
@@ -69,8 +109,11 @@
       "moduleOutputPath" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/Modules/MatrixApp.swiftmodule",
       "objects" : [
         "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MatrixApp.swift.o",
+        "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MatrixRenderer.swift.o",
         "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MatrixScene.swift.o",
         "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MatrixView.swift.o",
+        "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MetalView.swift.o",
+        "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/TextureAtlas.swift.o",
         "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/resource_bundle_accessor.swift.o"
       ],
       "otherArguments" : [
@@ -137,11 +180,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MatrixRenderer.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MatrixScene.swift.o"
         },
         {
           "kind" : "file",
           "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MatrixView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MetalView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/TextureAtlas.swift.o"
         },
         {
           "kind" : "file",
@@ -155,8 +210,11 @@
       "prepareForIndexing" : false,
       "sources" : [
         "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixApp.swift",
+        "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixRenderer.swift",
         "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixScene.swift",
         "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixView.swift",
+        "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MetalView.swift",
+        "/Users/o29/github-matrix-gemini/Sources/MatrixApp/TextureAtlas.swift",
         "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/DerivedSources/resource_bundle_accessor.swift"
       ],
       "tempsPath" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build",
@@ -175,8 +233,11 @@
       "github_matrix_gemini",
       "-c",
       "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixApp.swift",
+      "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixRenderer.swift",
       "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixScene.swift",
       "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixView.swift",
+      "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MetalView.swift",
+      "/Users/o29/github-matrix-gemini/Sources/MatrixApp/TextureAtlas.swift",
       "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/DerivedSources/resource_bundle_accessor.swift",
       "-I",
       "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/Modules",
@@ -282,11 +343,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixRenderer.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixScene.swift"
         },
         {
           "kind" : "file",
           "name" : "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MetalView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/Sources/MatrixApp/TextureAtlas.swift"
         },
         {
           "kind" : "file",
@@ -308,11 +381,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MatrixRenderer.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MatrixScene.swift.o"
         },
         {
           "kind" : "file",
           "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MatrixView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/MetalView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/debug/MatrixApp.build/TextureAtlas.swift.o"
         },
         {
           "kind" : "file",
