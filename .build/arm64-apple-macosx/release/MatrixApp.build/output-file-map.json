@@ -1,0 +1,49 @@
+{
+  "": {
+    "dependencies": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixApp.d",
+    "object": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixApp.o",
+    "swift-dependencies": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/master.swiftdeps"
+  },
+  "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixApp.swift": {
+    "object": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixApp.swift.o",
+    "swiftmodule": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixApp.swiftdeps",
+    "diagnostics": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixApp.dia"
+  },
+  "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixRenderer.swift": {
+    "object": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixRenderer.swift.o",
+    "swiftmodule": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixRenderer~partial.swiftmodule",
+    "swift-dependencies": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixRenderer.swiftdeps",
+    "diagnostics": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixRenderer.dia"
+  },
+  "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixScene.swift": {
+    "object": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixScene.swift.o",
+    "swiftmodule": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixScene~partial.swiftmodule",
+    "swift-dependencies": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixScene.swiftdeps",
+    "diagnostics": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixScene.dia"
+  },
+  "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MatrixView.swift": {
+    "object": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixView.swift.o",
+    "swiftmodule": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixView~partial.swiftmodule",
+    "swift-dependencies": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixView.swiftdeps",
+    "diagnostics": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MatrixView.dia"
+  },
+  "/Users/o29/github-matrix-gemini/Sources/MatrixApp/MetalView.swift": {
+    "object": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MetalView.swift.o",
+    "swiftmodule": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MetalView~partial.swiftmodule",
+    "swift-dependencies": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MetalView.swiftdeps",
+    "diagnostics": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/MetalView.dia"
+  },
+  "/Users/o29/github-matrix-gemini/Sources/MatrixApp/TextureAtlas.swift": {
+    "object": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/TextureAtlas.swift.o",
+    "swiftmodule": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/TextureAtlas~partial.swiftmodule",
+    "swift-dependencies": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/TextureAtlas.swiftdeps",
+    "diagnostics": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/TextureAtlas.dia"
+  },
+  "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/DerivedSources/resource_bundle_accessor.swift": {
+    "object": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/resource_bundle_accessor.swift.o",
+    "swiftmodule": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/resource_bundle_accessor~partial.swiftmodule",
+    "swift-dependencies": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/resource_bundle_accessor.swiftdeps",
+    "diagnostics": "/Users/o29/github-matrix-gemini/.build/arm64-apple-macosx/release/MatrixApp.build/resource_bundle_accessor.dia"
+  }
+}

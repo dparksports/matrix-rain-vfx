@@ -24,8 +24,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let contentView = MatrixView()
             .edgesIgnoringSafeArea(.all)
 
+        let screenRect = NSScreen.main?.frame ?? NSRect(x: 0, y: 0, width: 800, height: 600)
+        let windowWidth = screenRect.width / 3.0
+        let windowHeight = screenRect.height
+        
         window = FloatingWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 800, height: 600),
+            contentRect: NSRect(x: 0, y: 0, width: windowWidth, height: windowHeight),
             styleMask: [.borderless, .fullSizeContentView],
             backing: .buffered,
             defer: false
