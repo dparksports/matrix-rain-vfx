@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         let screenRect = NSScreen.main?.frame ?? NSRect(x: 0, y: 0, width: 800, height: 600)
         // User requested to shorten by 1/3 again, so (1/3) * (2/3) = 2/9 of screen width
-        let windowWidth = (screenRect.width / 3.0) * (2.0 / 3.0)
+        let windowWidth = (screenRect.width / 13.0)
         let windowHeight = screenRect.height
         
         window = FloatingWindow(
@@ -36,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             defer: false
         )
         
-        window.center()
+        window.setFrameOrigin(.zero)
         window.setFrameAutosaveName("MatrixWindow")
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
