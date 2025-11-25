@@ -36,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             defer: false
         )
         
-        window.setFrameOrigin(.zero)
+        window.setFrameOrigin(NSPoint(x: -windowWidth, y: 0))
         window.setFrameAutosaveName("MatrixWindow")
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
