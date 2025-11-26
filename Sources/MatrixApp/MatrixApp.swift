@@ -1,6 +1,11 @@
 import SwiftUI
 import AppKit
 
+extension Notification.Name {
+    static let tuckUnderMenu = Notification.Name("tuckUnderMenu")
+    static let tuckUnderDock = Notification.Name("tuckUnderDock")
+}
+
 @main
 struct MatrixApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -59,6 +64,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Make it movable by background
         window.isMovableByWindowBackground = true
+        
+        // Observers for UI buttons
+        NotificationCenter.default.addObserver(forName: .tuckUnderMenu, object: nil, queue: .main) { _ in
+            guard let screen = self.window.screen else { return }
+            let screenFrame = screen.frame
+            let visibleFrame = screen.visibleFrame
+            
+            let menuBarHeight = screenFrame.height - visibleFrame.maxY
+            if menuBarHeight > 0 {
+                let newFrame = NSRect(x: 0, y: visibleFrame.maxY, width: screenFrame.width, height: menuBarHeight)
+                self.window.setFrame(newFrame, display: true)
+                self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.mainMenuWindow)) - 1)
+            }
+        }
+        
+        NotificationCenter.default.addObserver(forName: .tuckUnderDock, object: nil, queue: .main) { _ in
+            guard let screen = self.window.screen else { return }
+            let screenFrame = screen.frame
+            let visibleFrame = screen.visibleFrame
+            
+            let dockHeight = visibleFrame.minY - screenFrame.minY
+            if dockHeight > 0 {
+                let newFrame = NSRect(x: 0, y: screenFrame.minY, width: screenFrame.width, height: dockHeight)
+                self.window.setFrame(newFrame, display: true)
+                self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)
+            }
+        }
     }
 }
 
