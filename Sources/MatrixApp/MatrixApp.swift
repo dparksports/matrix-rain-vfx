@@ -4,6 +4,8 @@ import AppKit
 extension Notification.Name {
     static let tuckUnderMenu = Notification.Name("tuckUnderMenu")
     static let tuckUnderDock = Notification.Name("tuckUnderDock")
+    static let tuckLeft = Notification.Name("tuckLeft")
+    static let tuckRight = Notification.Name("tuckRight")
 }
 
 @main
@@ -92,6 +94,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self.window.setFrame(newFrame, display: true)
                 self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)
             }
+        }
+        
+        NotificationCenter.default.addObserver(forName: .tuckLeft, object: nil, queue: .main) { _ in
+            guard let screen = self.window.screen else { return }
+            let screenFrame = screen.frame
+            
+            // Simulate Left Dock
+            let dockWidth: CGFloat = 80.0 // Fixed width for simulated dock
+            let newFrame = NSRect(x: screenFrame.minX, y: screenFrame.minY, width: dockWidth, height: screenFrame.height)
+            self.window.setFrame(newFrame, display: true)
+            self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)
+        }
+        
+        NotificationCenter.default.addObserver(forName: .tuckRight, object: nil, queue: .main) { _ in
+            guard let screen = self.window.screen else { return }
+            let screenFrame = screen.frame
+            
+            // Simulate Right Dock
+            let dockWidth: CGFloat = 80.0 // Fixed width for simulated dock
+            let newFrame = NSRect(x: screenFrame.maxX - dockWidth, y: screenFrame.minY, width: dockWidth, height: screenFrame.height)
+            self.window.setFrame(newFrame, display: true)
+            self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)
         }
     }
 }
