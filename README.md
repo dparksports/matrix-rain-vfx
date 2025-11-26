@@ -1,4 +1,4 @@
-# Matrix Rain (Metal)
+# Matrix Rain VFX
 
 A high-performance, native macOS Matrix digital rain screensaver/application built with Swift and Metal.
 
@@ -18,7 +18,7 @@ You can build and run this application entirely from the terminal using the Swif
 
 ### Prerequisites
 
-*   macOS with Apple Silicon (M1/M2/M3) or Intel.
+*   macOS with Apple Silicon (M1/M2/M3/M4/M5) or Intel.
 *   **Xcode Command Line Tools**: Install by running `xcode-select --install` in your terminal.
 
 ### Build & Run
