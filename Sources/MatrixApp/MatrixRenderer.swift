@@ -45,7 +45,7 @@ class MatrixRenderer: NSObject, MTKViewDelegate {
     var drops: [Drop] = []
     var cols: Int = 0
     var rows: Int = 0
-    let fontSize: Float = 32.0
+    let fontSize: Float = Constants.fontSize
     var viewportSize: CGSize = .zero
     
     struct Drop {
