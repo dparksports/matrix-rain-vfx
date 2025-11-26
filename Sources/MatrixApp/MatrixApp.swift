@@ -34,7 +34,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // or start with 3 columns as per previous logic?
         // Let's stick to the previous logic for initial size: 2/9 of screen width
         let windowWidth = (screenRect.width / 13.0) 
-        let windowHeight = screenRect.height
+        // User requested height = laptop height - menu bar height
+        // visibleFrame.maxY is the bottom of the menu bar (top of usable area)
+        let windowHeight = NSScreen.main?.visibleFrame.maxY ?? screenRect.height
         
         window = FloatingWindow(
             contentRect: NSRect(x: 0, y: 0, width: windowWidth, height: windowHeight),
