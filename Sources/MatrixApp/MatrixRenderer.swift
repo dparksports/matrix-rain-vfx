@@ -180,8 +180,8 @@ class MatrixRenderer: NSObject, MTKViewDelegate {
     }
     
     func resizeGrid(size: CGSize) {
-        let newCols = Int(Float(size.width) / fontSize)
-        let newRows = Int(Float(size.height) / fontSize)
+        let newCols = max(1, Int(ceil(Float(size.width) / fontSize)))
+        let newRows = max(1, Int(ceil(Float(size.height) / fontSize)))
         
         if newCols != cols || newRows != rows {
             cols = newCols
