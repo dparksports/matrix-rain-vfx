@@ -45,8 +45,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Chamfered edges
         window.contentView?.wantsLayer = true
         window.contentView?.layer?.cornerRadius = 15.0
+        window.contentView?.layer?.borderWidth = 3.0
+        window.contentView?.layer?.borderColor = NSColor(deviceWhite: 0.85, alpha: 1.0).cgColor
         window.contentView?.layer?.masksToBounds = true
+        
         window.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true) // Fix focus
         window.backgroundColor = .clear // Clear for chamfer
         window.isOpaque = false // False for chamfer
         window.hasShadow = true
@@ -74,35 +78,36 @@ class FloatingWindow: NSWindow {
             switch event.specialKey {
             case .leftArrow:
                 // Stick to left
+                self.level = .floating // Reset level
                 let newOrigin = NSPoint(x: screenFrame.minX, y: self.frame.minY)
                 self.setFrameOrigin(newOrigin)
                 return
             case .rightArrow:
                 // Stick to right
+                self.level = .floating // Reset level
                 let newOrigin = NSPoint(x: screenFrame.maxX - self.frame.width, y: self.frame.minY)
                 self.setFrameOrigin(newOrigin)
                 return
             case .upArrow:
-                // Full screen (toggle or set)
-                // Just set to full screen frame
-                self.setFrame(screenFrame, display: true)
+                // Behind Menu Bar
+                // Calculate menu bar height (top of screen)
+                let menuBarHeight = screenFrame.height - visibleFrame.maxY
+                if menuBarHeight > 0 {
+                    let newFrame = NSRect(x: 0, y: visibleFrame.maxY, width: screenFrame.width, height: menuBarHeight)
+                    self.setFrame(newFrame, display: true)
+                    // Set level behind menu bar (MainMenuWindow is usually 24, we want just below it)
+                    self.level = NSWindow.Level(Int(CGWindowLevelForKey(.mainMenuWindow)) - 1)
+                }
                 return
             case .downArrow:
-                // Overlap docking (bottom)
-                // Height of dock area = screenFrame.height - visibleFrame.height (roughly)
-                // But visibleFrame.minY gives the top of the dock usually.
-                // We want to be at the bottom, with height = dock height?
-                // Or just snap to bottom?
-                // User said "overlap the docking with the same size of the docking window".
-                // Assuming this means cover the dock area.
+                // Behind Dock
+                // Calculate dock height (bottom of screen)
                 let dockHeight = visibleFrame.minY - screenFrame.minY
                 if dockHeight > 0 {
-                    let newFrame = NSRect(x: self.frame.minX, y: screenFrame.minY, width: self.frame.width, height: dockHeight)
+                    let newFrame = NSRect(x: 0, y: screenFrame.minY, width: screenFrame.width, height: dockHeight)
                     self.setFrame(newFrame, display: true)
-                } else {
-                    // Dock might be hidden or on side. Just snap to bottom.
-                    let newOrigin = NSPoint(x: self.frame.minX, y: screenFrame.minY)
-                    self.setFrameOrigin(newOrigin)
+                    // Set level behind dock (DockWindow is usually 20, we want just below it)
+                    self.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)
                 }
                 return
             default:
