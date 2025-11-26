@@ -1,5 +1,7 @@
 import SwiftUI
 import AppKit
+import FirebaseCore
+import FirebaseAnalytics
 
 extension Notification.Name {
     static let tuckUnderMenu = Notification.Name("tuckUnderMenu")
@@ -23,6 +25,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     var window: NSWindow!
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        print("Application Did Finish Launching")
+        // Configure Firebase
+        if let path = Bundle.module.path(forResource: "GoogleService-Info", ofType: "plist"),
+           let options = FirebaseOptions(contentsOfFile: path) {
+            FirebaseApp.configure(options: options)
+            print("Firebase Configured Successfully")
+        } else {
+            print("Error: Could not find GoogleService-Info.plist")
+        }
+
         // Register font
         if let url = Bundle.module.url(forResource: "Matrix-Code", withExtension: "ttf") {
             CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
@@ -60,6 +72,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         window.contentView?.layer?.masksToBounds = true
         
         window.makeKeyAndOrderFront(nil)
+        print("Initial Window Frame: \(window.frame)")
         NSApp.activate(ignoringOtherApps: true) // Fix focus
         window.backgroundColor = .clear // Clear for chamfer
         window.isOpaque = false // False for chamfer
@@ -73,8 +86,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // Observers for UI buttons
         NotificationCenter.default.addObserver(forName: .tuckUnderMenu, object: nil, queue: .main) { _ in
             guard let screen = self.window.screen else { return }
-            let screenFrame = screen.frame
-
+            
             let newFrame = NSRect(x: 0, y: 898, width: 1470, height: 58)
             self.window.setFrame(newFrame, display: true, animate: true)
             self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)            
@@ -124,7 +136,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     func windowDidResize(_ notification: Notification) {
         if let window = notification.object as? NSWindow {
-            print("Window Frame: \(window.frame)")
+            print("Window Frame (Resize): \(window.frame)")
+        }
+    }
+    
+    func windowDidMove(_ notification: Notification) {
+        if let window = notification.object as? NSWindow {
+            print("Window Frame (Move): \(window.frame)")
+        }
+    }
+    
+    func applicationDidBecomeActive(_ notification: Notification) {
+        if let window = self.window {
+            print("Window Frame (Active): \(window.frame)")
         }
     }
 }

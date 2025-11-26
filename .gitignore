@@ -1,0 +1,32 @@
+# Swift / SPM
+.build/
+.swiftpm/
+Packages/
+Package.resolved
+
+# Xcode
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+DerivedData/
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build Artifacts
+*.app
+*.dSYM
+*.o
+
+# Release Archives
+*.zip
+
+# Editor
+.vscode/
+.idea/
