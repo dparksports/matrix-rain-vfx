@@ -19,7 +19,7 @@ struct MatrixApp: App {
     }
 }
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     var window: NSWindow!
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -42,11 +42,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         window = FloatingWindow(
             contentRect: NSRect(x: 0, y: 0, width: windowWidth, height: windowHeight),
-            styleMask: [.borderless, .fullSizeContentView],
+            styleMask: [.borderless, .fullSizeContentView, .resizable],
             backing: .buffered,
             defer: false
         )
         
+        window.delegate = self // Set delegate for logging
         window.setFrameOrigin(.zero)
         window.setFrameAutosaveName("MatrixWindow")
         window.contentView = NSHostingView(rootView: contentView)
@@ -54,7 +55,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Chamfered edges
         window.contentView?.wantsLayer = true
         window.contentView?.layer?.cornerRadius = 15.0
-        window.contentView?.layer?.borderWidth = 3.0
+        window.contentView?.layer?.borderWidth = 1.0 // Thinner chamfer
         window.contentView?.layer?.borderColor = NSColor(deviceWhite: 0.85, alpha: 1.0).cgColor
         window.contentView?.layer?.masksToBounds = true
         
@@ -71,16 +72,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Observers for UI buttons
         NotificationCenter.default.addObserver(forName: .tuckUnderMenu, object: nil, queue: .main) { _ in
+            // guard let screen = self.window.screen else { return }
+            // let screenFrame = screen.frame
+            // let visibleFrame = screen.visibleFrame
+            
+            // let menuBarHeight = screenFrame.height - visibleFrame.maxY
+            // if menuBarHeight > 0 {
+            //     let newFrame = NSRect(x: 0, y: visibleFrame.maxY, width: screenFrame.width, height: menuBarHeight)
+            //     self.window.setFrame(newFrame, display: true)
+            //     self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)
+            // }
+
             guard let screen = self.window.screen else { return }
-            let screenFrame = screen.frame
+            let screenFrame = screen.frame            
             let visibleFrame = screen.visibleFrame
             
-            let menuBarHeight = screenFrame.height - visibleFrame.maxY
-            if menuBarHeight > 0 {
-                let newFrame = NSRect(x: 0, y: visibleFrame.maxY, width: screenFrame.width, height: menuBarHeight)
-                self.window.setFrame(newFrame, display: true)
-                self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.mainMenuWindow)) - 1)
-            }
+            var menuBarHeight = (screenFrame.height - visibleFrame.maxY) / 2
+            menuBarHeight += menuBarHeight / 2
+            let newFrame = NSRect(x: 0, y: screenFrame.height + menuBarHeight, width: screenFrame.width, height: menuBarHeight)
+            self.window.setFrame(newFrame, display: true)
+            self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)
         }
         
         NotificationCenter.default.addObserver(forName: .tuckUnderDock, object: nil, queue: .main) { _ in
@@ -116,6 +127,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let newFrame = NSRect(x: screenFrame.maxX - dockWidth, y: screenFrame.minY, width: dockWidth, height: screenFrame.height)
             self.window.setFrame(newFrame, display: true)
             self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)
+        }
+    }
+
+    func windowDidResize(_ notification: Notification) {
+        if let window = notification.object as? NSWindow {
+            print("Window Frame: \(window.frame)")
         }
     }
 }
