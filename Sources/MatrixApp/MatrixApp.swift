@@ -72,26 +72,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         
         // Observers for UI buttons
         NotificationCenter.default.addObserver(forName: .tuckUnderMenu, object: nil, queue: .main) { _ in
-            // guard let screen = self.window.screen else { return }
-            // let screenFrame = screen.frame
-            // let visibleFrame = screen.visibleFrame
-            
-            // let menuBarHeight = screenFrame.height - visibleFrame.maxY
-            // if menuBarHeight > 0 {
-            //     let newFrame = NSRect(x: 0, y: visibleFrame.maxY, width: screenFrame.width, height: menuBarHeight)
-            //     self.window.setFrame(newFrame, display: true)
-            //     self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)
-            // }
-
             guard let screen = self.window.screen else { return }
-            let screenFrame = screen.frame            
-            let visibleFrame = screen.visibleFrame
-            
-            var menuBarHeight = (screenFrame.height - visibleFrame.maxY) / 2
-            menuBarHeight += menuBarHeight / 2
-            let newFrame = NSRect(x: 0, y: screenFrame.height + menuBarHeight, width: screenFrame.width, height: menuBarHeight)
-            self.window.setFrame(newFrame, display: true)
-            self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)
+            let screenFrame = screen.frame
+
+            let newFrame = NSRect(x: 0, y: 898, width: 1470, height: 58)
+            self.window.setFrame(newFrame, display: true, animate: true)
+            self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)            
         }
         
         NotificationCenter.default.addObserver(forName: .tuckUnderDock, object: nil, queue: .main) { _ in
@@ -127,6 +113,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             let newFrame = NSRect(x: screenFrame.maxX - dockWidth, y: screenFrame.minY, width: dockWidth, height: screenFrame.height)
             self.window.setFrame(newFrame, display: true)
             self.window.level = NSWindow.Level(Int(CGWindowLevelForKey(.dockWindow)) - 1)
+        }
+
+        
+        // Trigger tuck under dock on launch
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .tuckUnderDock, object: nil)
         }
     }
 
