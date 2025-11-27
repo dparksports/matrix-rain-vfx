@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         
         window = FloatingWindow(
             contentRect: NSRect(x: 0, y: 0, width: windowWidth, height: windowHeight),
-            styleMask: [.borderless, .fullSizeContentView, .resizable],
+            styleMask: [.borderless], // DockerNeo uses only borderless
             backing: .buffered,
             defer: false
         )
@@ -76,8 +76,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         NSApp.activate(ignoringOtherApps: true) // Fix focus
         window.backgroundColor = .clear // Clear for chamfer
         window.isOpaque = false // False for chamfer
-        window.hasShadow = true
+        window.hasShadow = false // DockerNeo has false
         window.level = .floating
+        window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary] // Match DockerNeo
         window.ignoresMouseEvents = false
         
         // Make it movable by background

@@ -57,6 +57,9 @@ class MatrixRenderer: NSObject, MTKViewDelegate {
     var lastTime: TimeInterval = 0
     // let characters = ... (Removed)
     
+    var iconRenderer: IconRenderer?
+    var iconTexture: MTLTexture?
+    
     init?(metalKitView: MTKView) {
         guard let device = MTLCreateSystemDefaultDevice(),
               let queue = device.makeCommandQueue() else { return nil }
@@ -80,6 +83,11 @@ class MatrixRenderer: NSObject, MTKViewDelegate {
         } catch {
             print("Failed to load texture atlas: \(error)")
         }
+        
+        // Setup Icon Renderer
+        iconRenderer = IconRenderer(device: device)
+        let dockItems = IconManager.fetchDockItems()
+        iconRenderer?.update(with: dockItems)
     }
     
     func setupPipelines() {
@@ -172,6 +180,9 @@ class MatrixRenderer: NSObject, MTKViewDelegate {
         descriptor.usage = [.renderTarget, .shaderRead]
         sceneTexture = device.makeTexture(descriptor: descriptor)
         
+        // Icon Texture
+        iconTexture = device.makeTexture(descriptor: descriptor)
+        
         // Bloom textures (half size)
         let bloomDesc = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .bgra8Unorm, width: width/2, height: height/2, mipmapped: false)
         bloomDesc.usage = [.renderTarget, .shaderRead]
@@ -220,6 +231,7 @@ class MatrixRenderer: NSObject, MTKViewDelegate {
               let textureAtlas = textureAtlas,
               let instanceBuffer = instanceBuffer,
               let sceneTexture = sceneTexture,
+              let iconTexture = iconTexture,
               let bloomTexture1 = bloomTexture1,
               let bloomTexture2 = bloomTexture2 else { return }
         
@@ -233,6 +245,11 @@ class MatrixRenderer: NSObject, MTKViewDelegate {
         updateInstanceBuffer()
         
         guard let commandBuffer = commandQueue.makeCommandBuffer() else { return }
+        
+        // Pass 0: Render Icons to Texture
+        if let iconRenderer = iconRenderer {
+            iconRenderer.render(to: iconTexture, commandBuffer: commandBuffer)
+        }
         
         // Pass 1: Render Scene to Texture
         let scenePass = MTLRenderPassDescriptor()
@@ -251,6 +268,7 @@ class MatrixRenderer: NSObject, MTKViewDelegate {
                                     glyphSize: SIMD2<Float>(fontSize, fontSize)) // Pass font size
             encoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.size, index: 2)
             encoder.setFragmentTexture(textureAtlas.texture, index: 0)
+            encoder.setFragmentTexture(iconTexture, index: 1) // Pass icon texture
             
             let instanceCount = cols * rows
             encoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4, instanceCount: instanceCount)
