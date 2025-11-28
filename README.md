@@ -4,6 +4,10 @@ A high-performance, native Matrix digital rain VFX built with Swift and Metal fo
 
 ![Matrix Rain Screenshot](screenshot.png)
 
+## Demo
+
+[Watch the Demo Video](Sources/MatrixApp/Resources/demo.mov)
+
 ## Features
 
 *   **Native Metal Rendering**: High-performance rendering using a custom Metal pipeline.
@@ -25,7 +29,7 @@ You can build and run this application entirely from the terminal using the Swif
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/dparksports/matrix-rain.git
+    git clone https://github.com/dparksports/matrix-rain-vfx.git
     cd matrix-rain
     ```
 
