@@ -6,7 +6,7 @@ A high-performance, native Matrix digital rain VFX built with Swift and Metal fo
 
 ## Demo
 
-[Watch the Demo Video](Sources/MatrixApp/Resources/demo.mov)
+![Matrix Rain Demo](Sources/MatrixApp/Resources/demo.gif)
 
 ## Features
 
