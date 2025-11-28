@@ -1,5 +1,5 @@
 import Foundation
 
 struct Constants {
-    static let fontSize: Float = 16.0
+    static let fontSize: Float = 32.0
 }
