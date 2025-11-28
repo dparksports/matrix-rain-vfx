@@ -2,10 +2,6 @@
 
 A high-performance, native Matrix digital rain VFX built with Swift and Metal for Mac.
 
-![Matrix Rain Screenshot](screenshot.png)
-
-## Demo
-
 ![Matrix Rain Demo](Sources/MatrixApp/Resources/demo.gif)
 
 ## Features
