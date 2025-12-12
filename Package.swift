@@ -10,13 +10,13 @@ let package = Package(
         .executable(name: "MatrixApp", targets: ["MatrixApp"])
     ],
     dependencies: [
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.0.0"),
+        // .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.0.0"),
     ],
     targets: [
         .executableTarget(
             name: "MatrixApp",
             dependencies: [
-                .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
+                // .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
             ],
             resources: [
                 .process("Resources"),

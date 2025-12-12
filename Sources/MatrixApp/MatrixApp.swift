@@ -1,7 +1,7 @@
 import SwiftUI
 import AppKit
-import FirebaseCore
-import FirebaseAnalytics
+// import FirebaseCore
+// import FirebaseAnalytics
 
 extension Notification.Name {
     static let tuckUnderMenu = Notification.Name("tuckUnderMenu")
@@ -27,13 +27,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         print("Application Did Finish Launching")
         // Configure Firebase
-        if let path = Bundle.module.path(forResource: "GoogleService-Info", ofType: "plist"),
-           let options = FirebaseOptions(contentsOfFile: path) {
-            FirebaseApp.configure(options: options)
-            print("Firebase Configured Successfully")
-        } else {
-            print("Error: Could not find GoogleService-Info.plist")
-        }
+        // if let path = Bundle.module.path(forResource: "GoogleService-Info", ofType: "plist"),
+        //    let options = FirebaseOptions(contentsOfFile: path) {
+        //     FirebaseApp.configure(options: options)
+        //     print("Firebase Configured Successfully")
+        // } else {
+        //     print("Error: Could not find GoogleService-Info.plist")
+        // }
 
         // Register font
         if let url = Bundle.module.url(forResource: "Matrix-Code", withExtension: "ttf") {
@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         
         window = FloatingWindow(
             contentRect: NSRect(x: 0, y: 0, width: windowWidth, height: windowHeight),
-            styleMask: [.borderless, .fullSizeContentView, .resizable],
+            styleMask: [.borderless], // DockerNeo uses only borderless
             backing: .buffered,
             defer: false
         )
@@ -76,8 +76,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         NSApp.activate(ignoringOtherApps: true) // Fix focus
         window.backgroundColor = .clear // Clear for chamfer
         window.isOpaque = false // False for chamfer
-        window.hasShadow = true
+        window.hasShadow = false // DockerNeo has false
         window.level = .floating
+        window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary] // Match DockerNeo
         window.ignoresMouseEvents = false
         
         // Make it movable by background

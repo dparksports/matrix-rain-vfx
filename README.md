@@ -2,8 +2,7 @@
 
 A high-performance, native Matrix digital rain VFX built with Swift and Metal for Mac.
 
-!<img width="1470" height="94" alt="Screenshot 2025-11-27 at 7 23 57 PM" src="https://github.com/user-attachments/assets/d1d669cc-271d-43f3-95c8-e30cabaabb4b" />
-
+![Matrix Rain Demo](Sources/MatrixApp/Resources/demo.gif)
 
 ## Features
 
@@ -26,7 +25,7 @@ You can build and run this application entirely from the terminal using the Swif
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/dparksports/matrix-rain.git
+    git clone https://github.com/dparksports/matrix-rain-vfx.git
     cd matrix-rain
     ```
 

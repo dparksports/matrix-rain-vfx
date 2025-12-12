@@ -11,6 +11,7 @@ struct VertexOut {
     float2 texCoord;
     float brightness;
     bool isHead;
+    float2 screenUV; // Added for icon map sampling
 };
 
 struct InstanceData {
@@ -18,13 +19,13 @@ struct InstanceData {
     int glyphIndex;  // Index in the atlas
     float brightness;
     float isHead;    // 0.0 or 1.0
-    float3 padding;  // Pad to 32 bytes (8+4+4+4 = 20, +12 = 32)
+    float3 padding;  // Pad to 32 bytes
 };
 
 struct Uniforms {
     float2 viewportSize;
     float2 atlasDimensions;
-    float2 glyphSize; // Added
+    float2 glyphSize;
 };
 
 vertex VertexOut vertexShader(VertexIn in [[stage_in]],
@@ -38,14 +39,13 @@ vertex VertexOut vertexShader(VertexIn in [[stage_in]],
     float2 pixelPos = instance.position + in.position * uniforms.glyphSize;
     
     // Convert to clip space (-1 to 1)
-    // 0,0 is top-left in screen, but -1,1 is top-left in clip
     float2 clipPos = (pixelPos / uniforms.viewportSize) * 2.0 - 1.0;
     clipPos.y = -clipPos.y; // Flip Y
     
     out.position = float4(clipPos, 0.0, 1.0);
+    out.screenUV = pixelPos / uniforms.viewportSize; // Pass screen UV
     
     // Calculate Texture Coordinates
-    // Atlas is a grid.
     int cols = int(uniforms.atlasDimensions.x);
     int row = instance.glyphIndex / cols;
     int col = instance.glyphIndex % cols;
@@ -63,13 +63,18 @@ vertex VertexOut vertexShader(VertexIn in [[stage_in]],
 
 fragment float4 fragmentShader(VertexOut in [[stage_in]],
                                texture2d<float> atlasTexture [[texture(0)]],
+                               texture2d<float> iconTexture [[texture(1)]], // Added icon map
                                sampler textureSampler [[sampler(0)]]) {
     
     float4 sample = atlasTexture.sample(textureSampler, in.texCoord);
-    // Use red channel as alpha to support both transparent and black backgrounds
     float alpha = sample.r;
     
     if (alpha < 0.1) discard_fragment();
+    
+    // Sample icon map
+    constexpr sampler iconSampler(coord::normalized, address::clamp_to_edge, filter::linear);
+    float4 iconColor = iconTexture.sample(iconSampler, in.screenUV);
+    float iconBrightness = iconColor.r; // Grayscale value
     
     float3 color;
     
@@ -77,8 +82,14 @@ fragment float4 fragmentShader(VertexOut in [[stage_in]],
     if (in.isHead) {
         // Head is white with a slight green tint
         color = float3(0.8, 1.0, 0.8);
-        // Boost brightness for glow effect
-        color *= 2.0; // Increased boost
+        
+        // Modulate brightness with icon map
+        // Boost brightness where icon is present
+        if (iconBrightness > 0.1) {
+             color += float3(iconBrightness * 2.0); // Add icon brightness
+        }
+        
+        color *= 2.0; // Base boost
     } else {
         // Tail
         float3 baseGreen = float3(0.0, 0.9, 0.2);
@@ -93,8 +104,72 @@ fragment float4 fragmentShader(VertexOut in [[stage_in]],
     return float4(color, alpha * in.brightness);
 }
 
-// Post-Processing Shaders
+// ... Post-Processing Shaders ...
 
+// Icon Rendering Shaders
+
+struct IconVertexOut {
+    float4 position [[position]];
+    float2 texCoord;
+};
+
+vertex IconVertexOut iconVertexShader(uint vertexID [[vertex_id]],
+                                      constant float4& rect [[buffer(0)]], // x, y, w, h
+                                      constant float2& viewport [[buffer(1)]]) {
+    IconVertexOut out;
+    
+    // 0, 1, 2, 3 -> Triangle Strip
+    float2 positions[4] = {
+        float2(0, 0),
+        float2(1, 0),
+        float2(0, 1),
+        float2(1, 1)
+    };
+    
+    // UVs for upright image (0,0 bottom-left in Metal texture)
+    // If texture loaded with origin bottom-left:
+    // Top-Left vertex (0,0 relative) -> UV (0, 1)
+    // Bottom-Left vertex (0,1 relative) -> UV (0, 0)
+    // Wait, rect.y is top or bottom?
+    // In IconRenderer: y = (height - h) / 2. This is top-down Y?
+    // If viewport (0,0) is top-left.
+    // Then rect.y is distance from top.
+    // Vertex 0 (0,0) -> rect.x, rect.y (Top-Left)
+    // Vertex 2 (0,1) -> rect.x, rect.y + h (Bottom-Left)
+    
+    float2 texCoords[4] = {
+        float2(0, 1), // Top-Left
+        float2(1, 1), // Top-Right
+        float2(0, 0), // Bottom-Left
+        float2(1, 0)  // Bottom-Right
+    };
+    
+    float2 pos = positions[vertexID];
+    float2 pixelPos = rect.xy + pos * rect.zw;
+    
+    // Convert to clip space
+    // 0,0 top-left -> -1, 1
+    float2 clipPos = (pixelPos / viewport) * 2.0 - 1.0;
+    clipPos.y = -clipPos.y; // Flip Y
+    
+    out.position = float4(clipPos, 0.0, 1.0);
+    out.texCoord = texCoords[vertexID];
+    
+    return out;
+}
+
+fragment float4 iconFragmentShader(IconVertexOut in [[stage_in]],
+                                   texture2d<float> iconTex [[texture(0)]]) {
+    constexpr sampler s(coord::normalized, address::clamp_to_edge, filter::linear);
+    float4 color = iconTex.sample(s, in.texCoord);
+    
+    // Convert to grayscale for height map
+    float luminance = dot(color.rgb, float3(0.299, 0.587, 0.114));
+    // Output luminance in all channels, preserve alpha
+    return float4(luminance, luminance, luminance, color.a);
+}
+
+// ... Existing Post-Processing Shaders ...
 struct QuadVertexOut {
     float4 position [[position]];
     float2 texCoord;
